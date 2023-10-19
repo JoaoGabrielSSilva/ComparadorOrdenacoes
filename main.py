@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 import random
+from bubbleSort import OrdenaBolha
 
 #
 root = Tk()
@@ -13,10 +14,10 @@ root.config(bg='black')
 
 #Variáveis
 algoritmo_selecionado = StringVar()
-
+dados = []
 #Funções
 
-def desenharDados(dados):
+def desenharDados(dados, listaCores):
   canvas.delete("all")
   alturaCanvas = 380
   larguraCanvas = 600
@@ -32,34 +33,25 @@ def desenharDados(dados):
     #inferior direita
     x1 = (i + 1) * larguraBarras + deslocamento
     y1 = alturaCanvas
-    canvas.create_rectangle(x0, y0, x1, y1, fill="yellow")
+    canvas.create_rectangle(x0, y0, x1, y1, fill=listaCores[i])
     canvas.create_text(x0 + 2, y0, anchor=SW, text=str(dados[i]))
+  root.update_idletasks()
 
 def Gerar():
-  print("Algoritmo Selecionado: " + algoritmo_selecionado.get())
-  try:
-    valMin = int(entradaMinimo.get())
-  except:
-    valMin = 1
-  try:
-    valMax = int(entradaMaximo.get())
-  except:
-    valMax = 10
-  try:
-    tamanho = int(entradaTamanho.get())
-  except:
-    tamanho = 10
+  global dados
+  valMin = int(entradaMinimo.get())
+  valMax = int(entradaMaximo.get())
+  tamanho = int(entradaQuantidade.get())
 
-  if valMin < 0 : valMin = 0
-  if valMax > 100 : valMax = 100
-  if tamanho > 30 or tamanho < 3: tamanho = 25
-  if valMin > valMax : valMin, valMax = valMax, valMin
-  
   dados = []
   for _ in range(tamanho):
     dados.append(random.randrange(valMin, valMax + 1))
 
-  desenharDados(dados)
+  desenharDados(dados, ['yellow' for x in range(len(dados))])
+
+def IniciarAlgoritmo():
+  global dados
+  OrdenaBolha(dados, desenharDados, escalaVelocidade.get())
 
 #Quadro / Layout base
 #
@@ -67,7 +59,7 @@ frameInterface = Frame(root, width=200, height=380, bg='grey')
 frameInterface.grid(row=0, column=0, padx=5, pady=5)
 
 #
-canvas = Canvas(root, width=550, height=380, bg='white')
+canvas = Canvas(root, width=700, height=380, bg='white')
 canvas.grid(row=0, column=1, padx=5, pady=5 )
 
 #Parte da Interface do Usuário
@@ -77,19 +69,22 @@ Label(frameInterface, text="Algoritmo: ", bg='grey').grid(row=0, column=0, padx=
 menuAlgoritmo = ttk.Combobox(frameInterface, textvariable=algoritmo_selecionado, values=['Bubble Sort', 'Merge Sort'])
 menuAlgoritmo.grid(row=0, column=1, padx=5, pady=5)
 menuAlgoritmo.current(0)
-Button(frameInterface, text="Gerar", command= Gerar, bg='red').grid(row=0, column=2, padx=5, pady=5)
+
+escalaVelocidade = Scale(frameInterface, from_=2.0, to=0.1, length=200, digits=2, resolution=0.2, orient=VERTICAL, label= "Velocidade")
+escalaVelocidade.grid(row=1, column=0, padx=5, pady=5)
+Button(frameInterface, text="Iniciar", command= IniciarAlgoritmo, bg='red').grid(row=4, column=1, padx=5, pady=5)
 #Linha 1
-#Campo de texto "Tamanho"
-Label(frameInterface, text="Tamanho: ", bg='grey').grid(row=1, column=0, padx=5, sticky=W)
-entradaTamanho = Entry(frameInterface)
-entradaTamanho.grid(row=1, column=1, padx=5, pady=5, sticky=W)
+#Campo de texto "Quantidade"
+entradaQuantidade = Scale(frameInterface, from_=25, to=3, digits=2, resolution=1, orient=VERTICAL, label= "Quantidade")
+entradaQuantidade.grid(row=1, column=1, padx=5, pady=5)
 #Campo de texto "Valor Mínimo"
-Label(frameInterface, text="Valor Mínimo: ", bg='grey').grid(row=2, column=0, padx=5, sticky=W)
-entradaMinimo = Entry(frameInterface)
-entradaMinimo.grid(row=2, column=1, padx=5, pady=5, sticky=W)
+entradaMinimo = Scale(frameInterface, from_=0, to=10, digits=2, resolution=1, orient=HORIZONTAL, label= "Valor Mínimo")
+entradaMinimo.grid(row=2, column=0, padx=5, pady=5)
 #Campo de texto "Valor Máximo"
-Label(frameInterface, text="Valor Máximo: ", bg='grey').grid(row=3, column=0, padx=5, sticky=W)
-entradaMaximo = Entry(frameInterface)
-entradaMaximo.grid(row=3, column=1, padx=5, pady=5, sticky=W)
+entradaMaximo = Scale(frameInterface, from_=10, to=100, digits=2, resolution=1, orient=HORIZONTAL, label= "Valor Máximo")
+entradaMaximo.grid(row=2, column=1, padx=5, pady=5)
+
+
+Button(frameInterface, text="Gerar", command= Gerar, bg='white').grid(row=4, column=0, padx=5, pady=5)
 #
 root.mainloop()
