@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import random
 from bubbleSort import OrdenaBolha  # Importa uma função "OrdenaBolha" do outro arquivo (bubbleSort.py)
-
+from quickSort import quickSort
 # Inicializa a janela principal
 root = Tk()
 
@@ -52,7 +52,13 @@ def Gerar():
 # Função para iniciar o algoritmo de ordenação
 def IniciarAlgoritmo():
     global dados
-    quantPassos.set(OrdenaBolha(dados, desenharDados, escalaVelocidade.get()))
+    if not dados: return
+
+    if menuAlgoritmo.get() == 'Quick Sort':
+        quickSort(dados, 0, len(dados) - 1, desenharDados, escalaVelocidade.get())
+        desenharDados(dados, ['green' for x in range(len(dados))])
+    elif menuAlgoritmo.get() == 'Bubble Sort':
+      quantPassos.set(OrdenaBolha(dados, desenharDados, escalaVelocidade.get()))
 
 # Criação da interface
 frameInterface = Frame(root, width=200, height=380, bg='grey')
@@ -65,7 +71,7 @@ canvas.grid(row=0, column=1, padx=5, pady=5)
 # Linha 0
 
 Label(frameInterface, text="Algoritmo: ", bg='grey').grid(row=0, column=0, padx=5, sticky=W)
-menuAlgoritmo = ttk.Combobox(frameInterface, textvariable=algoritmo_selecionado, values=['Bubble Sort', 'Merge Sort'])
+menuAlgoritmo = ttk.Combobox(frameInterface, textvariable=algoritmo_selecionado, values=['Bubble Sort','Quick Sort', 'Merge Sort' ])
 menuAlgoritmo.grid(row=0, column=1, padx=5, pady=5)
 menuAlgoritmo.current(0)
 
@@ -77,7 +83,7 @@ Label(frameInterface, textvariable= quantPassos, bg='grey').grid(row=1, column=1
 Label(frameInterface, text= "Tempo decorrido: ", bg='grey').grid(row=2, column=0, padx=5, sticky=W)
 
 #Velocidade
-escalaVelocidade = Scale(frameInterface, from_=0.1, to=2.0, length=200, digits=2, resolution=0.2, orient=VERTICAL, label="Velocidade")
+escalaVelocidade = Scale(frameInterface, from_=0.1, to=2.0, length=200, digits=2, resolution=0.2, orient=VERTICAL, label="Velocidade(s)")
 escalaVelocidade.grid(row=4, column=0, padx=5, pady=5)
 
 Button(frameInterface, text="Iniciar", command=IniciarAlgoritmo, bg='red').grid(row=5, column=1, padx=5, pady=5)
