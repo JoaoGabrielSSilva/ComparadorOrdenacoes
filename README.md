@@ -1,4 +1,4 @@
-# VerificadorVelocidadeOrdenacao
+# ComparadorOrdenacoes
 
 Este software foi programado em Python utilizando a biblioteca Tkinter de interface gráfica com o objetivo de demonstrar comparativamente as diferenças entre distintos algoritmos de ordenação.
 
