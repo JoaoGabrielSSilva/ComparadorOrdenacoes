@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 import random
-from bubbleSort import OrdenaBolha  # Importa uma função "OrdenaBolha" de outro arquivo (bubbleSort.py)
+from bubbleSort import OrdenaBolha  # Importa uma função "OrdenaBolha" do outro arquivo (bubbleSort.py)
 
 # Inicializa a janela principal
 root = Tk()
@@ -14,6 +14,8 @@ root.config(bg='black')
 # Variáveis
 algoritmo_selecionado = StringVar()
 dados = []
+quantPassos = IntVar()
+quantPassos.set(0)
 
 # Função para desenhar os dados na interface
 def desenharDados(dados, listaCores):
@@ -50,7 +52,7 @@ def Gerar():
 # Função para iniciar o algoritmo de ordenação
 def IniciarAlgoritmo():
     global dados
-    OrdenaBolha(dados, desenharDados, escalaVelocidade.get())
+    quantPassos.set(OrdenaBolha(dados, desenharDados, escalaVelocidade.get()))
 
 # Criação da interface
 frameInterface = Frame(root, width=200, height=380, bg='grey')
@@ -67,23 +69,32 @@ menuAlgoritmo = ttk.Combobox(frameInterface, textvariable=algoritmo_selecionado,
 menuAlgoritmo.grid(row=0, column=1, padx=5, pady=5)
 menuAlgoritmo.current(0)
 
-escalaVelocidade = Scale(frameInterface, from_=2.0, to=0.1, length=200, digits=2, resolution=0.2, orient=VERTICAL, label="Velocidade")
-escalaVelocidade.grid(row=1, column=0, padx=5, pady=5)
-Button(frameInterface, text="Iniciar", command=IniciarAlgoritmo, bg='red').grid(row=4, column=1, padx=5, pady=5)
+#Contador de Passos
+Label(frameInterface, text="Passos: ", bg='grey').grid(row=1, column=0, padx=5, sticky=W)
+Label(frameInterface, textvariable= quantPassos, bg='grey').grid(row=1, column=1, padx=5, sticky=W)
+
+#Tempo decorrido
+Label(frameInterface, text= "Tempo decorrido: ", bg='grey').grid(row=2, column=0, padx=5, sticky=W)
+
+#Velocidade
+escalaVelocidade = Scale(frameInterface, from_=0.1, to=2.0, length=200, digits=2, resolution=0.2, orient=VERTICAL, label="Velocidade")
+escalaVelocidade.grid(row=4, column=0, padx=5, pady=5)
+
+Button(frameInterface, text="Iniciar", command=IniciarAlgoritmo, bg='red').grid(row=5, column=1, padx=5, pady=5)
 
 # Linha 1
 # Campo de texto "Quantidade"
 entradaQuantidade = Scale(frameInterface, from_=25, to=3, digits=2, resolution=1, orient=VERTICAL, label="Quantidade")
-entradaQuantidade.grid(row=1, column=1, padx=5, pady=5)
+entradaQuantidade.grid(row=4, column=1, padx=5, pady=5)
 
 # Campo de texto "Valor Mínimo"
 entradaMinimo = Scale(frameInterface, from_=0, to=10, digits=2, resolution=1, orient=HORIZONTAL, label="Valor Mínimo")
-entradaMinimo.grid(row=2, column=0, padx=5, pady=5)
+entradaMinimo.grid(row=3, column=0, padx=5, pady=5)
 
 # Campo de texto "Valor Máximo"
 entradaMaximo = Scale(frameInterface, from_=10, to=100, digits=2, resolution=1, orient=HORIZONTAL, label="Valor Máximo")
-entradaMaximo.grid(row=2, column=1, padx=5, pady=5)
+entradaMaximo.grid(row=3, column=1, padx=5, pady=5)
 
-Button(frameInterface, text="Gerar", command=Gerar, bg='white').grid(row=4, column=0, padx=5, pady=5)
+Button(frameInterface, text="Gerar", command=Gerar, bg='white').grid(row=5, column=0, padx=5, pady=5)
 
 root.mainloop()
