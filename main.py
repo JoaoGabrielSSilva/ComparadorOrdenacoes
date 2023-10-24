@@ -2,7 +2,8 @@ from tkinter import *
 from tkinter import ttk
 import random
 from bubbleSort import OrdenaBolha  # Importa uma função "OrdenaBolha" do outro arquivo (bubbleSort.py)
-from quickSort import quickSort
+from quickSort import OrdenaRapido
+from mergeSort import  OrdenaMescla
 # Inicializa a janela principal
 root = Tk()
 
@@ -54,12 +55,14 @@ def IniciarAlgoritmo():
     global dados
     if not dados: return
 
+    #Escolha do algoritmo de ordenação
     if menuAlgoritmo.get() == 'Quick Sort':
-        quickSort(dados, 0, len(dados) - 1, desenharDados, escalaVelocidade.get())
-        desenharDados(dados, ['green' for x in range(len(dados))])
+        OrdenaRapido(dados, 0, len(dados) - 1, desenharDados, escalaVelocidade.get())
     elif menuAlgoritmo.get() == 'Bubble Sort':
-      quantPassos.set(OrdenaBolha(dados, desenharDados, escalaVelocidade.get()))
-
+        quantPassos.set(OrdenaBolha(dados, desenharDados, escalaVelocidade.get()))
+    elif menuAlgoritmo.get() == 'Merge Sort':
+        OrdenaMescla(dados, desenharDados, escalaVelocidade.get())
+    desenharDados(dados, ['green' for x in range(len(dados))])
 # Criação da interface
 frameInterface = Frame(root, width=200, height=380, bg='grey')
 frameInterface.grid(row=0, column=0, padx=5, pady=5)
