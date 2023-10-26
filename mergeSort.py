@@ -1,8 +1,8 @@
 import time
 
 def OrdenaMescla(dados, desenharDados, timeTick):
-  OrdenaMesclaAlgoritmo(dados, 0, len(dados)-1, desenharDados, timeTick)
-
+    return OrdenaMesclaAlgoritmo(dados, 0, len(dados)-1, desenharDados, timeTick, )
+    
 
 def OrdenaMesclaAlgoritmo(dados, esquerda, direita, desenharDados, timeTick):
   if esquerda < direita:
@@ -10,6 +10,7 @@ def OrdenaMesclaAlgoritmo(dados, esquerda, direita, desenharDados, timeTick):
     OrdenaMesclaAlgoritmo(dados, esquerda, meio, desenharDados, timeTick)
     OrdenaMesclaAlgoritmo(dados, meio + 1, direita, desenharDados, timeTick)
     Mesclar(dados, esquerda, meio, direita, desenharDados, timeTick)
+
 
 def Mesclar(dados, esquerda, meio, direita, desenharDados, timeTick):
   desenharDados(dados, pegarListaCores(len(dados), esquerda, meio, direita))
@@ -23,7 +24,7 @@ def Mesclar(dados, esquerda, meio, direita, desenharDados, timeTick):
   for indiceDados in range(esquerda, direita + 1):
     if indiceEsquerdo < len(ladoEsquerdo) and indiceDireito < len(ladoDireito):
       if ladoEsquerdo[indiceEsquerdo] <= ladoDireito[indiceDireito]:
-        dados[indiceDados] = ladoEsquerdo[indiceEsquerdo] #talvez cause erro
+        dados[indiceDados] = ladoEsquerdo[indiceEsquerdo]
         indiceEsquerdo += 1
       else: 
         dados[indiceDados] = ladoDireito[indiceDireito]
@@ -36,6 +37,7 @@ def Mesclar(dados, esquerda, meio, direita, desenharDados, timeTick):
       indiceDireito += 1
   desenharDados(dados, ["green" if x >= esquerda and x <= direita else "white" for x in range(len(dados))])
   time.sleep(timeTick)
+
 
 def pegarListaCores(tamanho, esquerda, meio, direita ):
   listaCores = []
