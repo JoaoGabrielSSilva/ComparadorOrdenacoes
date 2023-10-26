@@ -1,7 +1,6 @@
 import time
 # Função de ordenação do Bubble Sort
 
-
 def OrdenaBolha(dados, desenharDados, timeTick):
   passos = 0
 # Loop para percorrer a lista (len(dados) - 1) vezes  
