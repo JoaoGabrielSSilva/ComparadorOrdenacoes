@@ -17,6 +17,7 @@ algoritmo_selecionado = StringVar()
 dados = []
 quantPassos = IntVar()
 quantPassos.set(0)
+dadosSalvos = []
 
 # Função para desenhar os dados na interface
 def desenharDados(dados, listaCores):
@@ -40,16 +41,34 @@ def desenharDados(dados, listaCores):
 # Função para gerar dados aleatórios
 def Gerar():
     global dados
+    global dadosSalvos
     valMin = int(entradaMinimo.get())
     valMax = int(entradaMaximo.get())
     tamanho = int(entradaQuantidade.get())
 
     dados = []
+    #Gera um valor aleatório na quantidade especificada
     for _ in range(tamanho):
         dados.append(random.randrange(valMin, valMax + 1))
-
+    
+    #Cada valor gerado é passado para a lista dadosSalvos para ter a possibilidade de reiniciar a ordenação
+    for i in range(tamanho):
+        dadosSalvos.append(dados[i])
+    
     desenharDados(dados, ['yellow' for x in range(len(dados))])
 
+#Função para reiniciar para a lista de dados inicial sem ordenação
+def ReiniciarOrdenacao():
+    global dadosSalvos
+    global dados
+    quantPassos.set(0)
+    tamanho = int(entradaQuantidade.get())
+    dados = []
+    for _ in range(tamanho):
+        dados.append(dadosSalvos[_])
+
+    desenharDados(dados, ['yellow' for x in range(len(dados))])
+    
 # Função para iniciar o algoritmo de ordenação
 def IniciarAlgoritmo():
     global dados
@@ -61,7 +80,7 @@ def IniciarAlgoritmo():
     elif menuAlgoritmo.get() == 'Bubble Sort':
         quantPassos.set(OrdenaBolha(dados, desenharDados, escalaVelocidade.get()))
     elif menuAlgoritmo.get() == 'Merge Sort':
-        OrdenaMescla(dados, desenharDados, escalaVelocidade.get())
+        quantPassos.set(OrdenaMescla(dados, desenharDados, escalaVelocidade.get()))
     desenharDados(dados, ['green' for x in range(len(dados))])
 # Criação da interface
 frameInterface = Frame(root, width=200, height=380, bg='grey')
@@ -82,19 +101,8 @@ menuAlgoritmo.current(0)
 Label(frameInterface, text="Passos: ", bg='grey').grid(row=1, column=0, padx=5, sticky=W)
 Label(frameInterface, textvariable= quantPassos, bg='grey').grid(row=1, column=1, padx=5, sticky=W)
 
-#Tempo decorrido
-Label(frameInterface, text= "Tempo decorrido: ", bg='grey').grid(row=2, column=0, padx=5, sticky=W)
-
-#Velocidade
-escalaVelocidade = Scale(frameInterface, from_=0.1, to=2.0, length=200, digits=2, resolution=0.2, orient=VERTICAL, label="Velocidade(s)")
-escalaVelocidade.grid(row=4, column=0, padx=5, pady=5)
-
-Button(frameInterface, text="Iniciar", command=IniciarAlgoritmo, bg='red').grid(row=5, column=1, padx=5, pady=5)
-
-# Linha 1
-# Campo de texto "Quantidade"
-entradaQuantidade = Scale(frameInterface, from_=25, to=3, digits=2, resolution=1, orient=VERTICAL, label="Quantidade")
-entradaQuantidade.grid(row=4, column=1, padx=5, pady=5)
+#Botão para reiniciar a ordenação
+Button(frameInterface, text="Reset", command=ReiniciarOrdenacao, bg='red').grid(row=2, column=0, padx=5, pady=5)
 
 # Campo de texto "Valor Mínimo"
 entradaMinimo = Scale(frameInterface, from_=0, to=10, digits=2, resolution=1, orient=HORIZONTAL, label="Valor Mínimo")
@@ -104,6 +112,20 @@ entradaMinimo.grid(row=3, column=0, padx=5, pady=5)
 entradaMaximo = Scale(frameInterface, from_=10, to=100, digits=2, resolution=1, orient=HORIZONTAL, label="Valor Máximo")
 entradaMaximo.grid(row=3, column=1, padx=5, pady=5)
 
+#Velocidade
+escalaVelocidade = Scale(frameInterface, from_=0.1, to=2.0, length=200, digits=2, resolution=0.2, orient=VERTICAL, label="Velocidade(s)")
+escalaVelocidade.grid(row=4, column=0, padx=5, pady=5)
+
+# Campo de texto "Quantidade"
+entradaQuantidade = Scale(frameInterface, from_=25, to=3, digits=2, resolution=1, orient=VERTICAL, label="Quantidade")
+entradaQuantidade.grid(row=4, column=1, padx=5, pady=5)
+
+#Botão para gerar um conjunto de dados
 Button(frameInterface, text="Gerar", command=Gerar, bg='white').grid(row=5, column=0, padx=5, pady=5)
+
+#Botão para iniciar a ordenação
+Button(frameInterface, text="Iniciar", command=IniciarAlgoritmo, bg='green').grid(row=5, column=1, padx=5, pady=5)
+
+
 
 root.mainloop()
