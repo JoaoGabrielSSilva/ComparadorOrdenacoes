@@ -21,15 +21,15 @@ def particao(dados, cabeca, ponta, desenharDados, timeTick):
   dados[borda], dados[ponta] = dados[ponta], dados[borda]
   return borda
 
-def quickSort(dados, cabeca, ponta, desenharDados, timeTick):
+def OrdenaRapido(dados, cabeca, ponta, desenharDados, timeTick):
   if cabeca < ponta:
     indiceParticao = particao(dados, cabeca, ponta, desenharDados, timeTick)
 
     #Partição da esquerda
-    quickSort(dados, cabeca, indiceParticao - 1, desenharDados, timeTick)
+    OrdenaRapido(dados, cabeca, indiceParticao - 1, desenharDados, timeTick)
 
     #Partição da direita
-    quickSort(dados, indiceParticao + 1, ponta, desenharDados, timeTick)
+    OrdenaRapido(dados, indiceParticao + 1, ponta, desenharDados, timeTick)
 
 def pegarListaCores(qtdDados, cabeca, ponta, borda, indiceAtual,  estaTrocando = False):
   listaCores = []
