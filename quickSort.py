@@ -1,16 +1,28 @@
 import time
+
+global passos
+
+def OrdenaRapidoPrincipal(dados, cabeca, ponta, desenharDados, timeTick):
+  global passos
+  passos = 0
+  OrdenaRapido(dados, cabeca, ponta, desenharDados, timeTick)
+  return passos
+
 def particao(dados, cabeca, ponta, desenharDados, timeTick):
+  global passos
   borda = cabeca
   pivot = dados[ponta]
 
   desenharDados(dados, pegarListaCores(len(dados), cabeca, ponta, borda, borda))
   time.sleep(timeTick)
+
   for j in range(cabeca, ponta):
     if dados[j] < pivot:
       desenharDados(dados, pegarListaCores(len(dados), cabeca, ponta, borda, j, True))
       time.sleep(timeTick)
       dados[borda], dados[j] = dados[j], dados[borda] 
       borda += 1
+      passos += 1
 
     desenharDados(dados, pegarListaCores(len(dados), cabeca, ponta, borda, j))
     time.sleep(timeTick)
@@ -19,9 +31,11 @@ def particao(dados, cabeca, ponta, desenharDados, timeTick):
   time.sleep(timeTick)
   #trocando o pivô pelo valor da borda  
   dados[borda], dados[ponta] = dados[ponta], dados[borda]
+  passos += 1
   return borda
 
 def OrdenaRapido(dados, cabeca, ponta, desenharDados, timeTick):
+  global passos
   if cabeca < ponta:
     indiceParticao = particao(dados, cabeca, ponta, desenharDados, timeTick)
 
@@ -30,6 +44,7 @@ def OrdenaRapido(dados, cabeca, ponta, desenharDados, timeTick):
 
     #Partição da direita
     OrdenaRapido(dados, indiceParticao + 1, ponta, desenharDados, timeTick)
+  return passos
 
 def pegarListaCores(qtdDados, cabeca, ponta, borda, indiceAtual,  estaTrocando = False):
   listaCores = []
@@ -52,3 +67,4 @@ def pegarListaCores(qtdDados, cabeca, ponta, borda, indiceAtual,  estaTrocando =
         listaCores[i] = 'green'
 
   return listaCores
+
