@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import random
 from bubbleSort import OrdenaBolha  # Importa uma função "OrdenaBolha" do outro arquivo (bubbleSort.py)
-from quickSort import OrdenaRapido
+from quickSort import OrdenaRapidoPrincipal
 from mergeSort import  OrdenaMescla
 # Inicializa a janela principal
 root = Tk()
@@ -62,6 +62,7 @@ def ReiniciarOrdenacao():
     global dadosSalvos
     global dados
     quantPassos.set(0)
+    if not dados: return
     tamanho = int(entradaQuantidade.get())
     dados = []
     for _ in range(tamanho):
@@ -76,7 +77,8 @@ def IniciarAlgoritmo():
 
     #Escolha do algoritmo de ordenação
     if menuAlgoritmo.get() == 'Quick Sort':
-        OrdenaRapido(dados, 0, len(dados) - 1, desenharDados, escalaVelocidade.get())
+        quantPassos.set(OrdenaRapidoPrincipal(dados, 0, len(dados) - 1, desenharDados, escalaVelocidade.get()))
+        
     elif menuAlgoritmo.get() == 'Bubble Sort':
         quantPassos.set(OrdenaBolha(dados, desenharDados, escalaVelocidade.get()))
     elif menuAlgoritmo.get() == 'Merge Sort':
