@@ -1,16 +1,23 @@
 import time
 
+global passos
+
 def OrdenaMescla(dados, desenharDados, timeTick):
-    return OrdenaMesclaAlgoritmo(dados, 0, len(dados)-1, desenharDados, timeTick, )
+    global passos
+    passos = 0
+    OrdenaMesclaAlgoritmo(dados, 0, len(dados)-1, desenharDados, timeTick)
+    return passos
     
 
 def OrdenaMesclaAlgoritmo(dados, esquerda, direita, desenharDados, timeTick):
+  global passos
   if esquerda < direita:
     meio = (esquerda + direita) // 2
     OrdenaMesclaAlgoritmo(dados, esquerda, meio, desenharDados, timeTick)
     OrdenaMesclaAlgoritmo(dados, meio + 1, direita, desenharDados, timeTick)
     Mesclar(dados, esquerda, meio, direita, desenharDados, timeTick)
-
+    passos += 1
+    
 
 def Mesclar(dados, esquerda, meio, direita, desenharDados, timeTick):
   desenharDados(dados, pegarListaCores(len(dados), esquerda, meio, direita))
