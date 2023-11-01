@@ -4,6 +4,7 @@ import random
 from bubbleSort import OrdenaBolha  # Importa uma função "OrdenaBolha" do outro arquivo (bubbleSort.py)
 from quickSort import OrdenaRapidoPrincipal
 from mergeSort import  OrdenaMescla
+from bogoSort import bogoSort
 # Inicializa a janela principal
 root = Tk()
 
@@ -83,6 +84,8 @@ def IniciarAlgoritmo():
         quantPassos.set(OrdenaBolha(dados, desenharDados, escalaVelocidade.get()))
     elif menuAlgoritmo.get() == 'Merge Sort':
         quantPassos.set(OrdenaMescla(dados, desenharDados, escalaVelocidade.get()))
+    elif menuAlgoritmo.get() == 'Bogo Sort':
+        quantPassos.set(bogoSort(dados, desenharDados, escalaVelocidade.get()))
     desenharDados(dados, ['green' for x in range(len(dados))])
 # Criação da interface
 frameInterface = Frame(root, width=200, height=380, bg='grey')
@@ -95,7 +98,7 @@ canvas.grid(row=0, column=1, padx=5, pady=5)
 # Linha 0
 
 Label(frameInterface, text="Algoritmo: ", bg='grey').grid(row=0, column=0, padx=5, sticky=W)
-menuAlgoritmo = ttk.Combobox(frameInterface, textvariable=algoritmo_selecionado, values=['Bubble Sort','Quick Sort', 'Merge Sort' ])
+menuAlgoritmo = ttk.Combobox(frameInterface, textvariable=algoritmo_selecionado, values=['Bubble Sort','Quick Sort', 'Merge Sort', 'Bogo Sort' ])
 menuAlgoritmo.grid(row=0, column=1, padx=5, pady=5)
 menuAlgoritmo.current(0)
 
