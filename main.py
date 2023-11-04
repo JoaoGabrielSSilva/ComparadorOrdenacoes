@@ -1,28 +1,29 @@
-from tkinter import *
-from tkinter import ttk
-import random
+# Importação das bibliotecas necessárias
+from tkinter import * # Importa a biblioteca para criar a interface gráfica
+from tkinter import ttk # Importa a biblioteca ttk para widgets temáticos
+import random # Importa a biblioteca random para gerar números aleatórios
 from bubbleSort import OrdenaBolha  # Importa uma função "OrdenaBolha" do outro arquivo (bubbleSort.py)
-from quickSort import OrdenaRapidoPrincipal
-from mergeSort import  OrdenaMescla
-from bogoSort import bogoSort
+from quickSort import OrdenaRapidoPrincipal # Importa uma função "OrdenaBolha" do outro arquivo (bubbleSort.py)
+from mergeSort import  OrdenaMescla # Importa uma função "OrdenaRapidoPrincipal" do outro arquivo (quickSort.py)
+from bogoSort import bogoSort # Importa uma função "OrdenaMescla" do outro arquivo (mergeSort.py)
 # Inicializa a janela principal
 root = Tk()
 
 # Configurações da janela
-root.title('Visualização de Algoritmos de Ordenação')
-root.maxsize(1300, 800)
-root.config(bg='black')
+root.title('Visualização de Algoritmos de Ordenação') # Define o título da janela
+root.maxsize(1300, 800) # Define o tamanho máximo da janela
+root.config(bg='black') # Define a cor de fundo da janela como preto
 
 # Variáveis
-algoritmo_selecionado = StringVar()
-dados = []
-quantPassos = IntVar()
-quantPassos.set(0)
-dadosSalvos = []
+algoritmo_selecionado = StringVar() # Variável para armazenar o algoritmo selecionado
+dados = [] # Armazena os dados a serem ordenados
+quantPassos = IntVar() # Contador de passos
+quantPassos.set(0) # Inicializa o contador com 0
+dadosSalvos = [] # Armazena uma cópia dos dados para reiniciar a ordenação
 
 # Função para desenhar os dados na interface
 def desenharDados(dados, listaCores):
-    canvas.delete("all")
+    canvas.delete("all") # Limpa o canvas
     alturaCanvas = 380
     larguraCanvas = 600
     larguraBarras = larguraCanvas / (len(dados) + 1)
@@ -34,10 +35,10 @@ def desenharDados(dados, listaCores):
         x0 = i * larguraBarras + deslocamento + espacamento
         y0 = alturaCanvas - altura * 340
         x1 = (i + 1) * larguraBarras + deslocamento
-        y1 = alturaCanvas
-        canvas.create_rectangle(x0, y0, x1, y1, fill=listaCores[i])
-        canvas.create_text(x0 + 2, y0, anchor=SW, text=str(dados[i]))
-    root.update_idletasks()
+        y1 = alturaCanvas 
+        canvas.create_rectangle(x0, y0, x1, y1, fill=listaCores[i]) # Cria um retângulo no canvas para representar cada elemento da lista
+        canvas.create_text(x0 + 2, y0, anchor=SW, text=str(dados[i])) # Adiciona o valor de cada elemento como texto no retângulo
+    root.update_idletasks() # Atualiza a interface
 
 # Função para gerar dados aleatórios
 def Gerar():
@@ -78,25 +79,25 @@ def IniciarAlgoritmo():
 
     #Escolha do algoritmo de ordenação
     if menuAlgoritmo.get() == 'Quick Sort':
-        quantPassos.set(OrdenaRapidoPrincipal(dados, 0, len(dados) - 1, desenharDados, escalaVelocidade.get()))
-        
+        quantPassos.set(OrdenaRapidoPrincipal(dados, 0, len(dados) - 1, desenharDados, escalaVelocidade.get())) # Chama a função de ordenação do Quick Sort e atualiza o contador de passos
     elif menuAlgoritmo.get() == 'Bubble Sort':
-        quantPassos.set(OrdenaBolha(dados, desenharDados, escalaVelocidade.get()))
+        quantPassos.set(OrdenaBolha(dados, desenharDados, escalaVelocidade.get())) # Chama a função de ordenação do Bubble Sort e atualiza o contador de passos
     elif menuAlgoritmo.get() == 'Merge Sort':
-        quantPassos.set(OrdenaMescla(dados, desenharDados, escalaVelocidade.get()))
+        quantPassos.set(OrdenaMescla(dados, desenharDados, escalaVelocidade.get())) # Chama a função de ordenação do Merge Sort e atualiza o contador de passos
     elif menuAlgoritmo.get() == 'Bogo Sort':
-        quantPassos.set(bogoSort(dados, desenharDados, escalaVelocidade.get()))
+        quantPassos.set(bogoSort(dados, desenharDados, escalaVelocidade.get())) # Chama a função de ordenação do Bogo Sort e atualiza o contador de passos
     desenharDados(dados, ['green' for x in range(len(dados))])
 # Criação da interface
+# frameInterface é a janela principal do programa
 frameInterface = Frame(root, width=200, height=380, bg='grey')
 frameInterface.grid(row=0, column=0, padx=5, pady=5)
 
+#Canvas é a área onde as ordenações serão desenhadas
 canvas = Canvas(root, width=700, height=380, bg='white')
 canvas.grid(row=0, column=1, padx=5, pady=5)
 
 # Parte da Interface do Usuário
-# Linha 0
-
+# Parte com a seleção do tipo de algoritmo para ordenação
 Label(frameInterface, text="Algoritmo: ", bg='grey').grid(row=0, column=0, padx=5, sticky=W)
 menuAlgoritmo = ttk.Combobox(frameInterface, textvariable=algoritmo_selecionado, values=['Bubble Sort','Quick Sort', 'Merge Sort', 'Bogo Sort' ])
 menuAlgoritmo.grid(row=0, column=1, padx=5, pady=5)
