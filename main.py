@@ -79,13 +79,17 @@ def IniciarAlgoritmo():
 
     #Escolha do algoritmo de ordenação
     if menuAlgoritmo.get() == 'Quick Sort':
-        quantPassos.set(OrdenaRapidoPrincipal(dados, 0, len(dados) - 1, desenharDados, escalaVelocidade.get())) # Chama a função de ordenação do Quick Sort e atualiza o contador de passos
+        quantPassos.set(OrdenaRapidoPrincipal(dados, 0, len(dados) - 1, desenharDados, escalaVelocidade.get())) 
+        # Chama a função de ordenação do Quick Sort e atualiza o contador de passos
     elif menuAlgoritmo.get() == 'Bubble Sort':
-        quantPassos.set(OrdenaBolha(dados, desenharDados, escalaVelocidade.get())) # Chama a função de ordenação do Bubble Sort e atualiza o contador de passos
+        quantPassos.set(OrdenaBolha(dados, desenharDados, escalaVelocidade.get())) 
+        # Chama a função de ordenação do Bubble Sort e atualiza o contador de passos
     elif menuAlgoritmo.get() == 'Merge Sort':
-        quantPassos.set(OrdenaMescla(dados, desenharDados, escalaVelocidade.get())) # Chama a função de ordenação do Merge Sort e atualiza o contador de passos
+        quantPassos.set(OrdenaMescla(dados, desenharDados, escalaVelocidade.get())) 
+        # Chama a função de ordenação do Merge Sort e atualiza o contador de passos
     elif menuAlgoritmo.get() == 'Bogo Sort':
-        quantPassos.set(bogoSort(dados, desenharDados, escalaVelocidade.get())) # Chama a função de ordenação do Bogo Sort e atualiza o contador de passos
+        quantPassos.set(bogoSort(dados, desenharDados, escalaVelocidade.get())) 
+        # Chama a função de ordenação do Bogo Sort e atualiza o contador de passos
     desenharDados(dados, ['green' for x in range(len(dados))])
 # Criação da interface
 # frameInterface é a janela principal do programa
@@ -99,7 +103,8 @@ canvas.grid(row=0, column=1, padx=5, pady=5)
 # Parte da Interface do Usuário
 # Parte com a seleção do tipo de algoritmo para ordenação
 Label(frameInterface, text="Algoritmo: ", bg='grey').grid(row=0, column=0, padx=5, sticky=W)
-menuAlgoritmo = ttk.Combobox(frameInterface, textvariable=algoritmo_selecionado, values=['Bubble Sort','Quick Sort', 'Merge Sort', 'Bogo Sort' ])
+menuAlgoritmo = ttk.Combobox(frameInterface, textvariable=algoritmo_selecionado, values=[
+    'Bubble Sort','Quick Sort', 'Merge Sort', 'Bogo Sort' ])
 menuAlgoritmo.grid(row=0, column=1, padx=5, pady=5)
 menuAlgoritmo.current(0)
 
