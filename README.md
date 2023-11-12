@@ -6,7 +6,7 @@
 
 * [João Gabriel Souza Silva](https://github.com/JoaoGabrielSSilva) - 27909379
 
-* [João Victor Souza]() - 27972950
+* [João Victor Souza](https://github.com/vicsoouz) - 27972950
 
 #### Este software foi programado em **Python** utilizando a biblioteca *Tkinter* de interface gráfica com o objetivo de demonstrar comparativamente as diferenças entre distintos algoritmos de ordenação.
 
