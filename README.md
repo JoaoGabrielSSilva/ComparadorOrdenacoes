@@ -3,11 +3,8 @@
 Alunos | RGM
 -------|------
 [Guilherme Bastos](https://github.com/EGG1203) | 26651165
-
 [Italo Santana](https://github.com/ItaloSantana2) | 28201108
-
 [João Gabriel Souza Silva](https://github.com/JoaoGabrielSSilva) | 27909379
-
 [João Victor Souza](https://github.com/vicsouz) | 27972950
 
 1. Este software foi programado em **Python** utilizando a biblioteca *Tkinter* de interface gráfica com o objetivo de demonstrar comparativamente as diferenças entre distintos algoritmos de ordenação.
