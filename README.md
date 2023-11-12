@@ -1,6 +1,6 @@
 # ComparadorOrdenacoes
 
-Alunos | RGM
+Aluno | RGM
 -------|------
 [Guilherme Bastos](https://github.com/EGG1203) | 26651165
 [Italo Santana](https://github.com/ItaloSantana2) | 28201108
