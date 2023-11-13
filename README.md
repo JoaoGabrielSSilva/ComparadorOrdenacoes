@@ -1,6 +1,6 @@
 # ComparadorOrdenacoes
 
-Link para a documentação completa: https://docs.google.com/document/d/1hR3NpggJuWOQgsLCEWps9vnWkJkZMAhbWVppGM1tPhc/edit?usp=sharing
+Documentação completa disponível [aqui](https://docs.google.com/document/d/1hR3NpggJuWOQgsLCEWps9vnWkJkZMAhbWVppGM1tPhc/edit?usp=sharing)
 
 1. Este software foi programado em **Python** utilizando a biblioteca *Tkinter* de interface gráfica com o objetivo de demonstrar comparativamente as diferenças entre distintos algoritmos de ordenação.
   
