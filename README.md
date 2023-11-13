@@ -1,5 +1,7 @@
 # ComparadorOrdenacoes
 
+Link para a documentação completa: https://docs.google.com/document/d/1hR3NpggJuWOQgsLCEWps9vnWkJkZMAhbWVppGM1tPhc/edit?usp=sharing
+
 1. Este software foi programado em **Python** utilizando a biblioteca *Tkinter* de interface gráfica com o objetivo de demonstrar comparativamente as diferenças entre distintos algoritmos de ordenação.
   
 2. O usuário pode selecionar qual algoritmo será utilizado, os valores de mínimo e máximo, a velocidade da ordenação e a quantidade de elementos a serem gerados. Os elementos são gerados aleatoriamente e possuem a chance de serem gerados de forma já ordenada.
