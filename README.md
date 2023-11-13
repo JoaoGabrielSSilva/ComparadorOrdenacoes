@@ -8,6 +8,8 @@ Documentação completa disponível [aqui](https://docs.google.com/document/d/1h
    
 3. Ao executar a ordenação, os passos são exibidos visualmente, demonstrando as comparações entre os elementos a serem ordenados até que todos estejam ordenados corretamente.
 
+4. Para começar, execute *main.py* para iniciar o programa e fazer os testes.
+
 
 
 #### Exemplo do Bubble Sort
